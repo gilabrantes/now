@@ -123,13 +123,19 @@ a:hover{
 
 #wrapper{
 	width:800px;
+
 }
-#list{
+#list-wrapper{
+	
 	margin-top:20px;
-	height:500px;
 	width:180px;
 	margin-left:20px;
 	float:right;
+
+}
+#list-wrapper{
+	overflow: auto;
+	height:500px;
 }
 
 #list li{
@@ -143,6 +149,7 @@ a:hover{
 	height:500px;
 	width:600px;
 	position:relative;
+
 }
 #chat p{
 	border-top:1px solid #191919;
@@ -151,9 +158,11 @@ a:hover{
 	
 }
 #chat-wrapper{
+	height:500px;
 	position:absolute;
 	bottom:70px;
 	width:100%;
+	overflow:auto;
 
 
 }
