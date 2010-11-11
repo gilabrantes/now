@@ -28,8 +28,7 @@ if (process.argv.length < 4) {
 			sys.puts(message);
 			server.broadcast(message);
 		});
-
-	}
+	});
 
 	server.listen(port, domain);
-
+}
