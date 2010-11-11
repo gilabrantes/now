@@ -25,7 +25,7 @@ if (process.argv.length < 4) {
     server.addListener("connection", function(conn){
 	conn.addListener("message", function(message){
 		sys.puts(message);
-    	//server.broadcast(data);
+		server.broadcast(message);
 	});
     });
 
