@@ -37,7 +37,8 @@ var server = ws.createServer({
 					if(validIdForToken(message.token))
 					break;
 				default:
-					throw("method not implemented");
+					server.broadcast("NI: "+message);
+					//throw("method not implemented");
 			}
 			
 			
