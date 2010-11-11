@@ -24,11 +24,11 @@ if (process.argv.length < 4) {
 
     server.addListener("connection", function(conn){
     	server.broadcast(data);
+	conn.addListener("message", function(message){
+		sys.puts(message);
+	});
     });
 
-    server.addListener("message", function(message){
-	sys.puts(message);
-     });
 }
 
 server.listen(port, domain);
