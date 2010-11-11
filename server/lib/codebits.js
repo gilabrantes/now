@@ -27,12 +27,7 @@ function userDetailsForToken(token) {
 	
 	request.end();
 	
-	request.on('response', function (response) {
-		response.setEncoding('utf8');
-		response.on('data', function (chunk) {
-			sys.puts(chunk);
-		});
-	});
+	return request;
 }
 
 function idForToken(token) {
@@ -48,9 +43,10 @@ function decodeToken(token) {
 
 	return buf.toString('ascii');
 }
-var token = "MjMjdHBpbnRvQHdlYnJlYWtzdHVmZi5jb20jOTUyM2M4NTQyOGUyZTFlODg5Nzg0ZGYxNzE0YWJmM2UjMTI4OTQzMjIyMyM2M2JiMTVhYjk1ZGM1MjYxZjg3NDJmNjVhMTI4YTI5Nw==";
 
-sys.puts(userDetailsForToken(token));
+//var token = "MjMjdHBpbnRvQHdlYnJlYWtzdHVmZi5jb20jOTUyM2M4NTQyOGUyZTFlODg5Nzg0ZGYxNzE0YWJmM2UjMTI4OTQzMjIyMyM2M2JiMTVhYjk1ZGM1MjYxZjg3NDJmNjVhMTI4YTI5Nw==";
+
+//sys.puts(userDetailsForToken(token));
 
 //sys.puts(idForToken("MjMjdHBpbnRvQHdlYnJlYWtzdHVmZi5jb20jOTUyM2M4NTQyOGUyZTFlODg5Nzg0ZGYxNzE0YWJmM2UjMTI4OTQzMjIyMyM2M2JiMTVhYjk1ZGM1MjYxZjg3NDJmNjVhMTI4YTI5Nw=="));
 
