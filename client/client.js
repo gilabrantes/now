@@ -25,7 +25,7 @@ default:
 function processInput(msg) {
 	if (tokens=msg.match(/\/auth\s+([^\s]+)\s+([^\s]+)/)) {
 		// api auth
-		$.ajax({url:"http://services.sapo.pt/Codebits/gettoken?user="+tokens[1]+"&password="+tokens[2], dataType:'jsonp', data:'', success: function (data){token=data.token;if (token) {addSystem('Authentication successfull!');}}});
+		$.ajax({url:"http://services.sapo.pt/Codebits/gettoken?user="+tokens[1]+"&password="+tokens[2], dataType:'jsonp', data:'', success: function (data){token=data.token;if (token) {conn.send('{"token":"'+token+'", "msg":"Authed!"}');addSystem('Authentication successfull!');}}});
 	} else {
 		if (token) {
 			conn.send('{"token":"'+token+'", "msg":"'+msg+'"}');
