@@ -3,6 +3,14 @@ var sys = require("sys"),
 		
 var codebits = http.createClient(80, 'services.sapo.pt');
 
+function printObject(o) {
+  var out = '';
+  for (var p in o) {
+    out += p + ': ' + o[p] + '\n';
+  }
+	return out;
+}
+
 function processInput(jsonPayload) {
 	var message = jsonPayload.rawInput;
 
