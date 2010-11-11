@@ -32,6 +32,20 @@ var server = ws.createServer({
 		conn.addListener("message", function(message){
 			sys.puts("new message: "+ message);
 			
+			if(clients[message.token]){
+				
+			}else{
+				var req = userDetailsForToken(message.token);
+				req.on('response', function (response) {
+					response.setEncoding('utf8');
+					response.on('data', function (chunk) {
+						clients[message.token] = JSON.parse(chunk);
+					});
+				});
+			}
+			
+			server.broadcast("server message: "+message);
+			
 			switch(message.type){
 				case 'auth':
 					if(validIdForToken(message.token))
@@ -40,7 +54,6 @@ var server = ws.createServer({
 					server.broadcast("NI: "+message);
 					//throw("method not implemented");
 			}
-			
 			
 			server.broadcast(message);
 		});
