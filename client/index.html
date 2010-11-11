@@ -11,7 +11,10 @@
 
 
 	<script type="text/javascript">
-
+		var conn = new WebSocket("ws://localhost:9000");
+		conn.onmessage = function(evt) {
+			console.debug(evt.data);
+		}
 
 	$(document).ready(function() {
 		$("#inputForm").live("submit", function(e) {
