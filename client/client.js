@@ -27,7 +27,7 @@ function processInput(msg) {
 		$.ajax({url:"http://services.sapo.pt/Codebits/gettoken?user="+tokens[1]+"&password="+tokens[2], dataType:'jsonp', data:'', success: function (data){token=data.token;if (token) {addSystem('Authentication successfull!');}}});
 	} else {
 		if (token) {
-			conn.send({'token':token, 'msg':msg});
+			conn.send("{'token':'"+token+"', 'msg':'"+msg+"'}");
 		} else {
 			addInfo('Please authenticate with the Codebits API using "/auth email password" <em>- [keep in mind this authentication is 100% client-side]</em>');
 		}
