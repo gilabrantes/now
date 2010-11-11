@@ -103,13 +103,20 @@ body{
 .pr-m{padding-right:1em;}
 .pr-l{padding-right:2em;}
 /*HR*/
-
+h1{
+	color:#390;
+	border-bottom:1px solid #191919;
+	text-transform: uppercase;
+	letter-spacing:0.05em;
+	
+}
 a{
 text-decoration:none;
-color:white;
+color:#9C6;
 }
 a:hover{
-	color:#999;
+	color:#390;
+
 }
 
 
@@ -118,24 +125,37 @@ a:hover{
 	width:800px;
 }
 #list{
+	margin-top:20px;
 	height:500px;
-	width:300px;
+	width:180px;
+	margin-left:20px;
 	float:right;
 }
+
+#list li{
+	border-bottom:1px #191919 solid;
+	padding:0em 0.3em;
+	padding-bottom:0.5em;
+}
+
 #chat{
 	color:#ccc;
 	height:500px;
-	width:500px;
+	width:600px;
 	position:relative;
 }
 #chat p{
 	border-top:1px solid #191919;
-	padding:0.2em 0em;
+	padding:0.2em 0px;
+
+	
 }
 #chat-wrapper{
 	position:absolute;
 	bottom:70px;
 	width:100%;
+
+
 }
 #chat-input{
 	position:absolute;
@@ -143,31 +163,29 @@ a:hover{
 	width:100%;
 }
 #inputBox{
-	width:100%;
+
 
 }
 input{
-	background:#090909;
+	width:590px;
+	background:#fff;
 	border:0px solid #fff;
 	border-top:5px solid #191919;
-	padding:10px 0px;
-	padding-top:10px;
-	color:#ccc;
+	padding:5px 5px;
+	color:#000;
 	margin:0px;
 }
 .help{
 	color:#333;
 }
 .notice{
-	color:red;
+	color:#390;
 	text-transform: uppercase;
 }
 .system{
 	color:#333;
 }
-.nick{
-	color:#6DA4E5;
-}
+
 .time{
 	color:#333;
 	padding-right:0.5em;
