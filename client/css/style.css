@@ -7,10 +7,10 @@
 
 html{
 	background:#000;
-	padding-left:20px;
-	padding-top:25px;
 }
-
+body{
+	margin:0px 20px;
+}
 .clear {
 	clear: both;
 	display: block;
@@ -134,12 +134,12 @@ a:hover{
 }
 #chat-wrapper{
 	position:absolute;
-	bottom:3em;
+	bottom:70px;
 	width:100%;
 }
 #chat-input{
 	position:absolute;
-	bottom:0px;
+	bottom:20px;
 	width:100%;
 }
 #inputBox{
@@ -147,18 +147,28 @@ a:hover{
 
 }
 input{
-	background:black;
+	background:#090909;
 	border:0px solid #fff;
 	border-top:5px solid #191919;
-	padding:0px 0px;
+	padding:10px 0px;
 	padding-top:10px;
 	color:#ccc;
 	margin:0px;
 }
-
+.help{
+	color:#333;
+}
+.notice{
+	color:red;
+	text-transform: uppercase;
+}
+.system{
+	color:#333;
+}
 .nick{
-	color:#666;
+	color:#6DA4E5;
 }
 .time{
-	color:#ccc;
+	color:#333;
+	padding-right:0.5em;
 }
