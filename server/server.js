@@ -32,6 +32,8 @@ var server = ws.createServer({
 		conn.addListener("message", function(message){
 			sys.puts("new message: "+ message);
 			
+			server.broadcast(message);
+			
 			if(clients[message.token]){
 				
 			}else{
@@ -54,8 +56,6 @@ var server = ws.createServer({
 					server.broadcast("NI: "+message);
 					//throw("method not implemented");
 			}
-			
-			server.broadcast(message);
 		});
 	});
 
