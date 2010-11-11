@@ -1,9 +1,8 @@
 function process(json) {
-	var now = new Date();
 	switch(json.type) {
 case 'msg':
 	// display msg
-	addMsg(now,json.payload.id, json.payload.name, json.payload.msg);
+	addMsg(json.payload.id, json.payload.name, json.payload.msg);
 	break;
 case 'join':
 	// another user joined chat
@@ -22,29 +21,35 @@ default:
 function processInput(msg) {
 	if (tokens=msg.match(/\/auth\s+([^\s]+)\s+([^\s]+)/)) {
 		// api auth
-		response = $.ajax({   type: "GET",   url: "https://services.sapo.pt/Codebits/gettoken",   data: "user="+tokens[1]+"&password="+tokens[2],   success: function(msg){alert( "Data Saved: " + msg );}});
+		$.ajax({url:"http://services.sapo.pt/Codebits/gettoken?user="+tokens[1]+"&password="+tokens[2], dataType:'jsonp', data:'', success: function (data){token=data.token;if (token) {addSystem('Authentication successfull!');}}});
 	} else {
 		if (token) {
-			conn.send({'token':token, 'msg':msg});	
+			conn.send({'token':token, 'msg':msg});
+		} else {
+			addInfo('Please authenticate with the Codebits API using "/auth email password" <em>- [keep in mind this authentication is 100% client-side]</em>');
 		}
 	}
+	clearField();
 }
 
-function addMsg(now, mid, mname, msg) {
+function addMsg(mid, mname, msg) {
+	var now = new Date();
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p><span class="time">['+h+':'+m+']</span> <a href="http://codebits.eu/intra/s/user/'+mid+'" class="nick">'+mname+': </a> '+msg+'</p>');
 	crop();
 }
 
-function addInfo(now, msg) {
+function addInfo(msg) {
+	var now = new Date();
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="help"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
 	crop();
 }
 
-function addSystem(now, msg) {
+function addSystem(msg) {
+	var now = new Date();
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="notice"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
@@ -59,4 +64,8 @@ function crop() {
 	}
 	// move div to bottom
 	$("#chat-wrapper").attr({ scrollTop: $("#chat-wrapper").attr("scrollHeight") });
+}
+
+function clearField() {
+	$('#inputForm').val('');
 }
