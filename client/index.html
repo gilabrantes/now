@@ -11,10 +11,7 @@
 
 
 	<script type="text/javascript">
-		var conn = new WebSocket("ws://localhost:9000");
-		conn.onmessage = function(evt) {
-			console.debug(evt.data);
-		}
+
 
 	$(document).ready(function() {
 		$("#inputForm").live("submit", function(e) {
@@ -25,6 +22,7 @@
 				console.debug("send error");
 			}
 		});
+		$('#chat').css("height",$(document).height());
 	});
 	</script>
 </head>
@@ -40,16 +38,17 @@
 	</div>
 	<div id="chat" class=" text-left" >
 		<div id="chat-wrapper" class="font11 line1">
-			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
-			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
-			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
-			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
-			<p><span class="time">[12:00]</span> <span class="nick">Jorge Jesus:</span> Exemplo de mensagem de sistema</p>
+
+			<p class="notice"><span class="time">[12:00]</span> *** Exemplo de mensagem de sistema ***</p>
+			<p class="help"><span class="time">[12:00]</span> Exemplo de mensagem de help</p>
+			<p class="system"><span class="time">[12:00]</span> Entrou no sistema</p>
+			<p><span class="time">[12:00]</span> <a href="#" class="nick">Humberto Coelho:</a> Exemplo de mensagem de pessoa</p>
+			<p><span class="time">[12:00]</span> <a href="#" class="nick">Jorge Jesus:</a> Exemplo de mensagem de pessoa</p>
 		</div>
 		<div id="chat-input">
 
 			<form id="inputForm">
-				<input type="text" class="helvetica font10 line1" name="inputBox" value="" id="inputBox"/>
+				<input type="text" class="helvetica font11 line1" name="inputBox" value="" id="inputBox"/>
 		</form>
 
 		</div>
