@@ -15,7 +15,7 @@
 	
 		var count = 0;
 		var token;
-		var conn = new WebSocket("ws://localhost:9009");
+		var conn = new WebSocket("ws://codebits.todo.nu:9009");
 		conn.onmessage = function(evt) {
 			console.debug("message: " + evt.data);
 			process(evt.data);
