@@ -1,5 +1,5 @@
 function process(json) {
-var now = new Date();
+	var now = new Date();
 	switch(json.type) {
 case 'msg':
 	// display msg
@@ -33,16 +33,26 @@ function addMsg(now, mid, mname, msg) {
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p><span class="time">['+h+':'+m+']</span> <a href="http://codebits.eu/intra/s/user/'+mid+'" class="nick">'+mname+': </a> '+msg+'</p>');
+	crop();
 }
 
 function addInfo(now, msg) {
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="help"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
+	crop();
 }
 
 function addSystem(now, msg) {
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="notice"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
+	crop();
+}
+
+function crop() {
+	count++;
+	if (count>200) {
+		$('#chat-wrapper p:first').remove();
+	}
 }
