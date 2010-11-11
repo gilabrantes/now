@@ -128,6 +128,12 @@ html{
 	width:500px;
 	position:relative;
 }
+#chat p{
+	border-top:1px solid #191919;
+	margin:0px;
+	padding:0px;
+	padding:0.5em 0em;
+}
 #chat-wrapper{
 	position:absolute;
 	bottom:3em;
@@ -145,19 +151,13 @@ html{
 input{
 	background:black;
 	border:0px solid #fff;
+	border-top:5px solid #191919;
 	padding:0px 0px;
+	padding-top:10px;
 	color:#ccc;
 	margin:0px;
 }
-.hr{
-	border:0px;
 
-	border-top:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	background:#666;
-	height:6px;
-
-}
 .nick{
-	color:red;
+	color:yellow;
 }
