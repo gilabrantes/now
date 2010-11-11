@@ -19,8 +19,6 @@
 
 	$(document).ready(function() {
 
-//		$.ajax({   type: "GET",   url: "https://services.sapo.pt/Codebits/gettoken",   data: "user=pelf@webreakstuff.com&password=",   success: function(msg){     alert( "Data Saved: " + msg );   } });
-
 		$("#inputForm").live("submit", function(e) {
 			e.preventDefault();
 			if (conn) {
@@ -36,6 +34,7 @@
 <body class="helvetica">
 <div id="wrapper">
 	<div id="list" class="font11 line1 text-left">
+		<h1 class="font24 pb-s">Stage A</h1>
 		<ul>
 			<li><a href="#">Humberto Coelho</a></li>
 			<li><a href="#">Jorge Jesus</a></li>

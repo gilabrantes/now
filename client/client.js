@@ -20,9 +20,10 @@ default:
 }
 
 function processInput(msg) {
-	if (msg.match(/\/auth/)) {
+	if (tokens=msg.match(/\/auth\s+([^\s]+)\s+([^\s]+)/)) {
 		// api auth
-		console.debug('auth!');
+		response = $.ajax({   type: "GET",   url: "https://services.sapo.pt/Codebits/gettoken",   data: "user="+tokens[1]+"&password="+tokens[2],   success: function(msg){alert( "Data Saved: " + msg );}});
+		
 	} else {
 		conn.send(msg);
 	}
