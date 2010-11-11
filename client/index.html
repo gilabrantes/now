@@ -12,7 +12,7 @@
 
 
 	<script type="text/javascript">
-		var conn = new WebSocket("ws://localhost:9000");
+		var conn = new WebSocket("ws://192.168.1.68:9000");
 		conn.onmessage = function(evt) {
 			process(evt.data);
 		}
@@ -21,7 +21,7 @@
 		$("#inputForm").live("submit", function(e) {
 			e.preventDefault();
 			if (conn) {
-				conn.send($('#inputBox').val());
+				processInput($('#inputBox').val());
 			} else {
 				console.debug("send error");
 			}
