@@ -23,9 +23,10 @@ function processInput(msg) {
 	if (tokens=msg.match(/\/auth\s+([^\s]+)\s+([^\s]+)/)) {
 		// api auth
 		response = $.ajax({   type: "GET",   url: "https://services.sapo.pt/Codebits/gettoken",   data: "user="+tokens[1]+"&password="+tokens[2],   success: function(msg){alert( "Data Saved: " + msg );}});
-		
 	} else {
-		conn.send(msg);
+		if (token) {
+			conn.send({'token':token, 'msg':msg});	
+		}
 	}
 }
 
@@ -51,8 +52,11 @@ function addSystem(now, msg) {
 }
 
 function crop() {
+	// keep elements at 500
 	count++;
-	if (count>200) {
+	if (count>500) {
 		$('#chat-wrapper p:first').remove();
 	}
+	// move div to bottom
+	$("#chat-wrapper").attr({ scrollTop: $("#chat-wrapper").attr("scrollHeight") });
 }
