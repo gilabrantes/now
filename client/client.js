@@ -1,5 +1,5 @@
 function process(json) {
-var now = new Date();
+	var now = new Date();
 	switch(json.type) {
 case 'msg':
 	// display msg
@@ -23,9 +23,10 @@ function processInput(msg) {
 	if (tokens=msg.match(/\/auth\s+([^\s]+)\s+([^\s]+)/)) {
 		// api auth
 		response = $.ajax({   type: "GET",   url: "https://services.sapo.pt/Codebits/gettoken",   data: "user="+tokens[1]+"&password="+tokens[2],   success: function(msg){alert( "Data Saved: " + msg );}});
-		
 	} else {
-		conn.send(msg);
+		if (token) {
+			conn.send({'token':token, 'msg':msg});	
+		}
 	}
 }
 
@@ -33,16 +34,29 @@ function addMsg(now, mid, mname, msg) {
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p><span class="time">['+h+':'+m+']</span> <a href="http://codebits.eu/intra/s/user/'+mid+'" class="nick">'+mname+': </a> '+msg+'</p>');
+	crop();
 }
 
 function addInfo(now, msg) {
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="help"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
+	crop();
 }
 
 function addSystem(now, msg) {
 	var h = now.getHours();
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="notice"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
+	crop();
+}
+
+function crop() {
+	// keep elements at 500
+	count++;
+	if (count>500) {
+		$('#chat-wrapper p:first').remove();
+	}
+	// move div to bottom
+	$("#chat-wrapper").attr({ scrollTop: $("#chat-wrapper").attr("scrollHeight") });
 }
