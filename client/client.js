@@ -6,12 +6,15 @@ case 'msg':
 	break;
 case 'join':
 	// another user joined chat
+	addInfo(json.payload.name+' joined the chat.');
 	break;
 case 'part':
 	// another user left chat
+	addInfo(json.payload.name+' left the chat.');
 	break;
 case 'notice':
 	// server notice
+	addSystem(json.payload.msg);
 	break;
 default:
   // unknown
