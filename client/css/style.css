@@ -5,6 +5,12 @@
 .text-left{text-align:left;}
 .text-right{text-align:right;}
 
+html{
+	background:#000;
+	padding-left:20px;
+	padding-top:25px;
+}
+
 .clear {
 	clear: both;
 	display: block;
@@ -106,14 +112,8 @@ a:hover{
 	color:#999;
 }
 
-html{
-	padding-left:20px;
-	padding-top:25px;
-	background:black;
-}
-#list ul , #list li{
-	margin:0px;
-}
+
+
 #wrapper{
 	width:800px;
 }
@@ -130,9 +130,7 @@ html{
 }
 #chat p{
 	border-top:1px solid #191919;
-	margin:0px;
-	padding:0px;
-	padding:0.5em 0em;
+	padding:0.2em 0em;
 }
 #chat-wrapper{
 	position:absolute;
@@ -145,7 +143,7 @@ html{
 	width:100%;
 }
 #inputBox{
-	width:460px;
+	width:100%;
 
 }
 input{
@@ -159,7 +157,7 @@ input{
 }
 
 .nick{
-	color:yellow;
+	color:#666;
 }
 .time{
 	color:#ccc;
