@@ -15,23 +15,33 @@
 		function printObject(o) {
 		  var out = '';
 		  for (var p in o) {
-		    out += p + ': ' + o[p] + '\n';
+		    out += p + ': ' + o[p] + '';
 		  }
 			return out;
 		}
 	
 		var count = 0;
 		var token;
-		var conn = new WebSocket("ws://codebits.todo.nu:9009");
+		var conn = new WebSocket("ws://localhost:9009");
 		conn.onmessage = function(evt) {
-			console.debug(printObject(evt.data));
+			console.debug("message: " + evt.data);
 			process(evt.data);
+		};
+		conn.onopen = function(){
+			console.debug("Socket has been opened!");
+		};
+		conn.onclose = function(){
+			console.debug("Socket has been closed!");
+		};
+		conn.onerror = function(){
+			console.debug("Socket got an error!");
 		};
 
 	$(document).ready(function() {
 
 		$("#inputForm").live("submit", function(e) {
 			e.preventDefault();
+
 			if (conn) {
 				processInput($('#inputBox').val());
 			} else {

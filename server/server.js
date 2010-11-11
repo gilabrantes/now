@@ -30,22 +30,29 @@ var server = ws.createServer({
 		sys.puts("new connection: "+ conn);
 		
 		conn.addListener("message", function(message){
-			sys.puts("new message: "+ message);
+			var msg = JSON.parse(message);
 			
-			server.broadcast("message received: " + message);
-			/*
-			if(clients[message.token]){
-				
+			sys.puts("message from token: "+ msg.token);
+			
+			server.broadcast("message received: " + msg.msg);
+			
+			if(clients[msg.token]){
+				sys.puts("gotcha!");
 			}else{
-				var req = userDetailsForToken(message.token);
-				req.on('response', function (response) {
+				var request = codebits.userDetailsForToken(msg.token);
+				request.on('response', function (response) {
 					response.setEncoding('utf8');
 					response.on('data', function (chunk) {
-						clients[message.token] = JSON.parse(chunk);
+						clients[msg.token] = JSON.parse(chunk);
 					});
 				});
 			}
 			
+			for(var i in clients){
+				sys.puts(clients[i].nick);
+			}
+			
+			/*
 			server.broadcast("server message: "+message);
 			
 			switch(message.type){
