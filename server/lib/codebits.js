@@ -1,4 +1,7 @@
-var sys = require("sys");
+var sys = require("sys"),
+		http = require("http");
+		
+var codebits = http.createClient(80, 'services.sapo.pt');
 
 function processInput(jsonPayload) {
 	var message = jsonPayload.rawInput;
@@ -19,6 +22,19 @@ function processInput(jsonPayload) {
 	}
 }
 
+function userDetailsForToken(token) {
+	var request = codebits.request('GET', "/Codebits/user/"+idForToken(token)+"?token="+token, {'host': 'services.sapo.pt'});
+	
+	request.end();
+	
+	request.on('response', function (response) {
+		response.setEncoding('utf8');
+		response.on('data', function (chunk) {
+			sys.puts(chunk);
+		});
+	});
+}
+
 function idForToken(token) {
 	var decoded = decodeToken(token);
 	var splat = decoded.split("#");
@@ -32,6 +48,9 @@ function decodeToken(token) {
 
 	return buf.toString('ascii');
 }
+var token = "MjMjdHBpbnRvQHdlYnJlYWtzdHVmZi5jb20jOTUyM2M4NTQyOGUyZTFlODg5Nzg0ZGYxNzE0YWJmM2UjMTI4OTQzMjIyMyM2M2JiMTVhYjk1ZGM1MjYxZjg3NDJmNjVhMTI4YTI5Nw==";
 
-sys.puts(idForToken("MjMjdHBpbnRvQHdlYnJlYWtzdHVmZi5jb20jOTUyM2M4NTQyOGUyZTFlODg5Nzg0ZGYxNzE0YWJmM2UjMTI4OTQzMjIyMyM2M2JiMTVhYjk1ZGM1MjYxZjg3NDJmNjVhMTI4YTI5Nw=="));
+sys.puts(userDetailsForToken(token));
+
+//sys.puts(idForToken("MjMjdHBpbnRvQHdlYnJlYWtzdHVmZi5jb20jOTUyM2M4NTQyOGUyZTFlODg5Nzg0ZGYxNzE0YWJmM2UjMTI4OTQzMjIyMyM2M2JiMTVhYjk1ZGM1MjYxZjg3NDJmNjVhMTI4YTI5Nw=="));
 
