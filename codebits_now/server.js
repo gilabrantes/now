@@ -1,5 +1,6 @@
 var sys = require("sys");
 var net = require("net");
+var http = require("http");
 var ws = require('./lib/node-websocket-server/lib/ws.js');
 var codebits = require('./lib/codebits.js');
 
@@ -10,11 +11,11 @@ var server = ws.createServer({
 });
 
 // argv parsing
-if (process.argv.length < 4) {
-	sys.puts("Usage: node now.js <domain> <port>");
-} else {
-	domain = process.argv[2];
-	port = process.argv[3];
+//if (process.argv.length < 4) {
+//	sys.puts("Usage: node now.js <domain> <port>");
+//} else {
+	//domain = process.argv[2];
+	//port = process.argv[3];
 
 	server.addListener("listening", function(){
 		sys.puts("Codebits now - Listening for connections.");
@@ -44,5 +45,5 @@ if (process.argv.length < 4) {
 		});
 	});
 
-	server.listen(port, domain);
-}
+	server.listen(9009);
+//}
