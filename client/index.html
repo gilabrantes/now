@@ -8,7 +8,7 @@
 
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" media="screen" title="no title" charset="utf-8">
-	
+	<script src="jquery-1.4.3.min.js" type="text/javascript"></script>
 	
 	<!-- Date: 2010-11-10 -->
 	<script type="text/javascript">
@@ -17,13 +17,16 @@
 			console.debug(evt.data);
 		}
 
-		function send_message() {
-			if(conn) {
-				conn.send($('inputBox').value);
+	$(document).ready(function() {
+		$("#inputForm").live("submit", function(e) {
+			e.preventDefault();
+			if (conn) {
+				conn.send($('#inputBox').val());
 			} else {
 				console.debug("send error");
 			}
-		}
+		});
+	});
 	</script>
 </head>
 <body class="helvetica">
@@ -44,8 +47,8 @@
 			<p><span class="time">[12:00]</span> <span class="nick">Jorge Jesus:</span> Exemplo de mensagem de sistema</p>
 		</div>
 		<div id="chat-input">
-			<form onsubmit="send_message()">
-			<input type="text" class="helvetica font11 line1" name="inputBox" value="" id="inputBox"/>
+			<form id="inputForm">
+				<input type="text" class="helvetica font10 line1" name="inputBox" value="" id="inputBox"/>
 		</form>
 		</div>
 	</div>
