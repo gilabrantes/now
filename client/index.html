@@ -5,9 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Chat Codebits</title>
-
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="css/reset-fonts-grids.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+
 	
 	
 	<!-- Date: 2010-11-10 -->
@@ -28,7 +28,7 @@
 </head>
 <body class="helvetica">
 <div id="wrapper">
-	<div id="list" class="font11 line1">
+	<div id="list" class="font11 line1 text-left">
 		<ul>
 			<li><a href="#">Humberto Coelho</a></li>
 			<li><a href="#">Jorge Jesus</a></li>
@@ -36,8 +36,9 @@
 			<li><a href="#">Walter Dias</a></li>
 		</ul>
 	</div>
-	<div id="chat" >
+	<div id="chat" class=" text-left" >
 		<div id="chat-wrapper" class="font11 line1">
+			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
 			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
 			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
 			<p><span class="time">[12:00]</span> <span class="nick">Humberto Coelho:</span> Exemplo de mensagem de sistema</p>
@@ -45,8 +46,8 @@
 		</div>
 		<div id="chat-input">
 			<form onsubmit="send_message()">
-			<input type="text" class="helvetica font11 line1" name="inputBox" value="" id="inputBox"/>
-		</form>
+				<input type="text" class="helvetica font11 line1" name="inputBox" value="" id="inputBox"/>
+			</form>
 		</div>
 	</div>
 </div>
