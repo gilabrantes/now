@@ -34,10 +34,12 @@ var server = ws.createServer({
 			
 			sys.puts("message from token: "+ msg.token);
 			
-			server.broadcast("message received: " + msg.msg);
+			//server.broadcast("message received: " + msg.msg);
 			
 			if(clients[msg.token]){
-				sys.puts("gotcha!");
+				sys.puts("user already known: "+ clients[msg.token].nick);
+				
+				server.broadcast('{"type":"msg","payload":{"msg":"'+msg.msg+'","id":"'+clients[msg.token].id+'","name":"'+clients[msg.token].nick+'"}}');
 			}else{
 				var request = codebits.userDetailsForToken(msg.token);
 				request.on('response', function (response) {
@@ -46,10 +48,6 @@ var server = ws.createServer({
 						clients[msg.token] = JSON.parse(chunk);
 					});
 				});
-			}
-			
-			for(var i in clients){
-				sys.puts(clients[i].nick);
 			}
 			
 			/*

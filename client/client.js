@@ -1,4 +1,5 @@
-function process(json) {
+function process(inputMessage) {
+	json = JSON.parse(inputMessage)
 	switch(json.type) {
 case 'msg':
 	// display msg
