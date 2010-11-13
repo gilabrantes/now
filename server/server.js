@@ -4,6 +4,7 @@ var http = require("http");
 var ws = require('./lib/node-websocket-server/lib/ws.js');
 var codebits = require('./lib/codebits.js');
 
+
 var clients = {};
 
 var server = ws.createServer({

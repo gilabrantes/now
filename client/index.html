@@ -32,9 +32,23 @@
 		};
 
 	$(document).ready(function() {
+		
+		$("#inputForm").keyup(function(evnt) {
+			console.debug(localStorage["chat-codebits-last-msg"]);
+			
+			if(evnt.which == '38'){
+					evnt.preventDefault();
+					$('#inputBox').val(localStorage["chat-codebits-last-msg"]);
+			}else if (evnt.which == '40'){
+					evnt.preventDefault();
+					$('#inputBox').val("");
+			}
+		});
 
 		$("#inputForm").live("submit", function(e) {
 			e.preventDefault();
+
+			localStorage.setItem("chat-codebits-last-msg", $('#inputBox').val());
 
 			if (conn) {
 				processInput($('#inputBox').val());
