@@ -17,6 +17,11 @@ case 'notice':
 	// server notice
 	addSystem(json.payload.msg);
 	break;
+case 'room':
+	$('ul#people').html("");
+  for(var person in json.payload.room.people){
+		addPerson(json.payload.room.people[person]);
+	}
 default:
   // unknown
 	}
@@ -25,7 +30,7 @@ default:
 function processInput(msg) {
 	if (tokens=msg.match(/\/auth\s+([^\s]+)\s+([^\s]+)/)) {
 		// api auth
-		$.ajax({url:"http://services.sapo.pt/Codebits/gettoken?user="+tokens[1]+"&password="+tokens[2], dataType:'jsonp', data:'', success: function (data){token=data.token;if (token) {conn.send('{"token":"'+token+'", "msg":"Authed!"}');addSystem('Authentication successfull!');}}});
+		$.ajax({url:"http://services.sapo.pt/Codebits/gettoken?user="+tokens[1]+"&password="+tokens[2], dataType:'jsonp', data:'', success: function (data){token=data.token;if (token) {conn.send('{"token":"'+token+'", "msg":"handshake"}');addSystem('Authentication successfull!');}}});
 	} else {
 		if (token) {
 			conn.send('{"token":"'+token+'", "msg":"'+msg+'"}');
@@ -59,6 +64,10 @@ function addSystem(msg) {
 	var m = now.getMinutes();
 	$('#chat-wrapper').append('<p class="notice"><span class="time">['+h+':'+m+']</span> '+msg+'</p>');
 	crop();
+}
+
+function addPerson (person) {
+	$('ul#people').append("<li><a href=\"http://codebits.eu/intra/s/user/\""+person.id+">"+person.name+"</a></li>");
 }
 
 function crop() {

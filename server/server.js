@@ -10,20 +10,27 @@ var server = ws.createServer({
 	debug: true
 });
 
-// argv parsing
-//if (process.argv.length < 4) {
-//	sys.puts("Usage: node now.js <domain> <port>");
-//} else {
-	//domain = process.argv[2];
-	//port = process.argv[3];
-
 	server.addListener("listening", function(){
 		sys.puts("Codebits now - Listening for connections.");
 		browsers = [];
 	});
 
 	server.addListener("close", function(conn) {
+		delete clients[conn.storage.get("token")];
+
 		conn.close();
+
+		var out = '{"type":"room","payload":{"room":{"name":"","people":[';
+		
+		for(var token in clients){
+			out += '{"name":"'+clients[token].name+'","id":"'+clients[token].id+'"},';
+		}
+		
+		out=out.replace(/,$/,"");
+		
+		out += ']}}}';
+		
+		server.broadcast(out);
 	});
 
 	server.addListener("connection", function(conn){
@@ -34,33 +41,43 @@ var server = ws.createServer({
 			
 			sys.puts("message from token: "+ msg.token);
 			
-			//server.broadcast("message received: " + msg.msg);
-			
-			if(clients[msg.token]){
-				sys.puts("user already known: "+ clients[msg.token].nick);
+			if(conn.storage.get("token")){
+				var client = clients[conn.storage.get("token")];
+				sys.puts("user already known: "+ client.nick);
 				
-				server.broadcast('{"type":"msg","payload":{"msg":"'+msg.msg+'","id":"'+clients[msg.token].id+'","name":"'+clients[msg.token].nick+'"}}');
-			}else{
+				server.broadcast('{"type":"msg","payload":{"msg":"'+msg.msg+'","id":"'+client.id+'","name":"'+client.nick+'"}}');
+			}else if(msg.msg == "handshake"){
+				sys.puts("handshake from user");
+				
+				conn.storage.set("token", msg.token);
+				
+				var user_data;
+				
 				var request = codebits.userDetailsForToken(msg.token);
+				
 				request.on('response', function (response) {
 					response.setEncoding('utf8');
 					response.on('data', function (chunk) {
-						clients[msg.token] = JSON.parse(chunk);
+						user_data = JSON.parse(chunk);
+						clients[msg.token] = user_data;
+						
+						conn.storage.set("user_data", user_data);
+						
+						var out = '{"type":"room","payload":{"room":{"name":"","people":[';
+						
+						for(var token in clients){
+							out += '{"name":"'+clients[token].name+'","id":"'+clients[token].id+'"},';
+						}
+						
+						out=out.replace(/,$/,"");
+						
+						out += ']}}}';
+						
+						server.broadcast(out);
+						
 					});
 				});
 			}
-			
-			/*
-			server.broadcast("server message: "+message);
-			
-			switch(message.type){
-				case 'auth':
-					if(validIdForToken(message.token))
-					break;
-				default:
-					server.broadcast("NI: "+message);
-					//throw("method not implemented");
-			}*/
 		});
 	});
 
